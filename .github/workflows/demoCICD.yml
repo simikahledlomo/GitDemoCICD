@@ -1,10 +1,10 @@
-name: Java CI with Maven Informal Trader
+name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -21,14 +21,16 @@ jobs:
         cache: 'maven'
     
     - name: Build with Maven
+      working-directory: ./GitDemoCICD  # Important: Your POM is in this subdirectory
+      run: mvn -B clean package
       
     - name: Run tests
+      working-directory: ./GitDemoCICD  # Same directory for tests
       run: mvn -B test
       
-    # Optional: Upload test results
     - name: Upload test results
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: target/surefire-reports/  # Fixed indentation and added trailing slash
+        path: GitDemoCICD/target/surefire-reports/
