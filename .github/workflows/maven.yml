@@ -21,11 +21,11 @@ jobs:
         cache: 'maven'
     
     - name: Build with Maven
-      working-directory: ./GitDemoCICD  # Important: Your POM is in this subdirectory InformalTrader
+      working-directory: ./GitDemoCICD
       run: mvn -B clean package
       
     - name: Run tests
-      working-directory: ./GitDemoCICD  # Same directory for tests
+      working-directory: ./GitDemoCICD
       run: mvn -B test
       
     - name: Upload test results
