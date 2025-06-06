@@ -20,17 +20,13 @@ jobs:
         distribution: 'temurin'
         cache: 'maven'
     
+    # Debug step - list all files (remove after debugging)
+    - name: Debug directory structure
+      run: ls -R
+    
+    # Option 1: If pom.xml is in the root - remove working-directory
     - name: Build with Maven
-      working-directory: GitDemoCICD
       run: mvn -B clean package
       
     - name: Run tests
-      working-directory: GitDemoCICD
       run: mvn -B test
-      
-    - name: Upload test results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-results
-        path: GitDemoCICD/target/surefire-reports/
