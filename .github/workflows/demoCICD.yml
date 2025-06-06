@@ -16,20 +16,20 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
-        java-version: '17' # Change this to your desired JDK version (8, 11, 17, etc.)
-        distribution: 'temurin' # Options: 'temurin', 'zulu', 'corretto', etc.
+        java-version: '17'
+        distribution: 'temurin'
         cache: 'maven'
     
     - name: Build with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn -B package  # Removed --file pom.xml as it's usually unnecessary
       
     - name: Run tests
       run: mvn -B test
       
     # Optional: Upload test results
     - name: Upload test results
-      if: always() # Run this step even if previous steps fail
+      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-results
-        path: target/surefire-reports
+        path: target/surefire-reports/  # Fixed indentation and added trailing slash
